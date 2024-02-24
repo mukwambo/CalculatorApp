@@ -1,0 +1,1 @@
+This is a simple calculator app for a beginer Android Developer, i tried it out as my first project just to test my skills as a newbie in android devopment. You are also free to clone the repository and try it out yourself. 
