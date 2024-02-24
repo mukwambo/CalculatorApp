@@ -1,9 +1,12 @@
 package com.mastercode.calculatorapp
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.HorizontalScrollView
 import android.widget.TextView
@@ -21,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.clickListener = ClickListener(this, binding.displayTextView)
+
+        // Change the status bar color to match that of our App
+        changeStatusBarColor(resources.getColor(R.color.backGroundBlack))
 
         // Initialize the views from the XML file
         horizontalScrollView = binding.horizontalScrollView
@@ -43,6 +49,13 @@ class MainActivity : AppCompatActivity() {
                 // Not needed in this case
             }
         })
+
+    }
+    // This method changes the status bar color
+    private fun changeStatusBarColor(color: Int) {
+        val window: Window = window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = color
     }
 
 }
