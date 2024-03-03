@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var horizontalScrollView: HorizontalScrollView
     private lateinit var displayTextView: TextView
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
