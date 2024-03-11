@@ -5,8 +5,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import java.sql.Array
 
-class ClickListener (private val context: Context, private val textView: TextView){
+class ClickListener (private val context: Context, private var textView: TextView){
 
     // Listener for clicks on the calculator buttons
 
@@ -14,9 +15,29 @@ class ClickListener (private val context: Context, private val textView: TextVie
     fun allClearClicked(view:View){
         textView.text = null
     }
-    fun changeSignClicked(view:View){
-        Toast.makeText(context,"You clicked changeSign", Toast.LENGTH_SHORT).show()
+    fun changeSignClicked(view: View) {
+        val originalText = textView.text.toString()
+
+        /* We use a StringBuilder to help us modify the string from the display.
+         Since Strings are immutable(You cannot directly modify them once declared), you aught to
+         use StringBuilders which give the modification functionality on strings.
+         */
+
+        val modifiedText = StringBuilder()
+
+        // Loop through the text on the display and replace the "+" with "-" and vice-versa
+
+        for (i in originalText) {
+            when (i) {
+                '+' -> modifiedText.append('-')
+                '-' -> modifiedText.append('+')
+                else -> modifiedText.append(i)
+            }
+        }
+
+        textView.text = modifiedText.toString()
     }
+
     fun percentageSignClicked(view:View){
         Toast.makeText(context,"You clicked percentageSign", Toast.LENGTH_SHORT).show()
     }
@@ -52,7 +73,7 @@ class ClickListener (private val context: Context, private val textView: TextVie
             val buttonText = view.text.toString()
             val currentText = textView.text.toString()
 
-            // Concatenates the button and screen texts then sets the screen text to the new text
+            // Concatenate the button and screen texts then set the screen text to the new text
             (currentText + buttonText).also { textView.text = it }
         }
     }
